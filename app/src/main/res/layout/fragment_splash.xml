@@ -33,6 +33,8 @@
         android:layout_marginBottom="@dimen/_20mdp"
         android:textColor="@color/darkTurquoise"
         android:textSize="@dimen/_12font_mdp"
+        tools:text="1.0.0"
+        android:text="نسخه 1.0.0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
