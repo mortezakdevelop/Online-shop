@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.example.onlineshopapplication.BuildConfig
 import com.example.onlineshopapplication.R
 import com.example.onlineshopapplication.data.data_store.SessionManager
 import com.example.onlineshopapplication.databinding.FragmentSplashBinding
@@ -58,8 +59,6 @@ class SplashFragment : Fragment() {
 
     @SuppressLint("SetTextI18n")
     private fun getVersionName() {
-/*
-        binding.versionTxt.text = "${getString(R.string.version)} : ${getString(R.string.versionName)}"
-*/
+        binding.versionTxt.text = BuildConfig.VERSION_NAME
     }
 }

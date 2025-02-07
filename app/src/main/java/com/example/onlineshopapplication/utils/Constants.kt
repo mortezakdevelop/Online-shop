@@ -7,6 +7,10 @@ const val CONNECTION_TIME_OUT = 90L
 const val PING_INTERVAL = 3L
 
 const val NAMED_PING = "named_ping"
+const val AUTHORIZATION = "authorization"
+const val BEARER = "bearer"
+const val ACCEPT = "accept"
+const val APPLICATION_JSON = "application/json"
 
 
 const val SESSION_AUTH_DATA = "Session_Auth_Data"

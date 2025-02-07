@@ -1,7 +1,13 @@
 package com.example.onlineshopapplication.di
 
+import com.example.onlineshopapplication.BuildConfig
+import com.example.onlineshopapplication.data.data_store.SessionManager
 import com.example.onlineshopapplication.data.network.ApiServices
+import com.example.onlineshopapplication.utils.ACCEPT
+import com.example.onlineshopapplication.utils.APPLICATION_JSON
+import com.example.onlineshopapplication.utils.AUTHORIZATION
 import com.example.onlineshopapplication.utils.BASE_URL
+import com.example.onlineshopapplication.utils.BEARER
 import com.example.onlineshopapplication.utils.CONNECTION_TIME_OUT
 import com.example.onlineshopapplication.utils.NAMED_PING
 import com.example.onlineshopapplication.utils.PING_INTERVAL
@@ -11,7 +17,10 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -42,8 +51,31 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(timeOut: Long, @Named(NAMED_PING) pingTimeOut: Long) =
+    fun provideInterceptor() = HttpLoggingInterceptor().apply {
+        level =
+            if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
+    }
+
+    @Provides
+    @Singleton
+    fun provideOkHttpClient(
+        timeOut: Long,
+        @Named(NAMED_PING) pingTimeOut: Long,
+        interceptor: HttpLoggingInterceptor,
+        sessionManager: SessionManager
+    ) =
         OkHttpClient.Builder()
+            .addInterceptor { chain ->
+                val token = runBlocking {
+                    sessionManager.getToken.first().toString()
+                }
+                chain.proceed(chain.request().newBuilder().also {
+                    it.addHeader(AUTHORIZATION, "$BEARER $token")
+                    it.addHeader(ACCEPT, APPLICATION_JSON)
+                }.build())
+            }.also { client ->
+                client.addInterceptor(interceptor)
+            }
             .writeTimeout(timeOut, TimeUnit.SECONDS)
             .readTimeout(timeOut, TimeUnit.SECONDS)
             .connectTimeout(timeOut, TimeUnit.SECONDS)
