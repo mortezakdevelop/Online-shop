@@ -1,12 +1,11 @@
 package com.example.onlineshopapplication.utils
 
-import android.util.Log
 import com.example.onlineshopapplication.data.models.NetworkMessageResponseModel
 import com.google.gson.Gson
 import retrofit2.Response
 
 open class NetworkMessagesResponse<T>(private val response:Response<T>) {
-    open fun generateNetworkResponse():NetworkRequestStatus<T>{
+    open fun generateNetworkMessageResponse():NetworkRequestStatus<T>{
         return when{
             response.code() == 401 -> NetworkRequestStatus.Error("باید نبت نام کنید")
             response.code() == 422 -> {

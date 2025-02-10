@@ -8,43 +8,43 @@
     android:focusableInTouchMode="true">
     <!-- Title -->
     <TextView
-        android:id="@+id/titleTxt"
+        android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_30mdp"
         android:text="@string/loginToApp"
         android:textStyle="bold"
         android:textColor="@color/darkTurquoise"
-        android:textSize="@dimen/_18font_mdp"
+        android:textSize="@dimen/_22font_mdp"
         app:fontPath="fonts/iransans_bold.ttf"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     <!-- Info -->
     <TextView
-        android:id="@+id/infoTxt"
+        android:id="@+id/tvInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_10mdp"
         android:text="@string/pleaseInputYourMobileNumber"
         android:textColor="@color/gray"
-        android:textSize="@dimen/_12font_mdp"
+        android:textSize="@dimen/_14font_mdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titleTxt" />
+        app:layout_constraintTop_toBottomOf="@id/tvTitle" />
     <!-- Animation -->
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animationView"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_180mdp"
         android:layout_marginTop="@dimen/_10mdp"
-        app:layout_constraintTop_toBottomOf="@id/infoTxt"
+        app:layout_constraintTop_toBottomOf="@id/tvInfo"
         app:lottie_autoPlay="true"
         app:lottie_loop="false"
         app:lottie_rawRes="@raw/lottie_phone" />
     <!-- Phone number -->
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/phoneInpLay"
+        android:id="@+id/tilMobilePhone"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -66,7 +66,7 @@
         app:startIconTint="@color/mediumTurquoise">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/phoneEdt"
+            android:id="@+id/edtMobilePhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="phone"
@@ -75,7 +75,7 @@
     </com.google.android.material.textfield.TextInputLayout>
     <!-- Button -->
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/sendPhoneBtn"
+        android:id="@+id/btnInputWithMobilePhone"
         android:layout_width="0dp"
         android:layout_height="@dimen/_40mdp"
         android:layout_marginTop="@dimen/_20mdp"
@@ -84,15 +84,15 @@
         android:insetBottom="0dp"
         android:textSize="@dimen/_14font_mdp"
         android:stateListAnimator="@null"
-        android:text="ارسال شماره ی موبایل"
+        android:text="@string/putWithMobilePhone"
         android:textColor="@color/white"
         app:backgroundTint="@null"
-        app:layout_constraintEnd_toEndOf="@id/phoneInpLay"
-        app:layout_constraintStart_toStartOf="@id/phoneInpLay"
-        app:layout_constraintTop_toBottomOf="@id/phoneInpLay" />
+        app:layout_constraintEnd_toEndOf="@id/tilMobilePhone"
+        app:layout_constraintStart_toStartOf="@id/tilMobilePhone"
+        app:layout_constraintTop_toBottomOf="@id/tilMobilePhone" />
     <!-- Img -->
     <ImageView
-        android:id="@+id/bottomImg"
+        android:id="@+id/ivBottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"

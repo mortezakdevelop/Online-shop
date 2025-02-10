@@ -11,4 +11,5 @@
     <string name="pleaseInputYourMobileNumber">لطفا شماره موبایل خود را وارد کنید</string>
     <string name="mobileNumber">شماره موبایل</string>
     <string name="versionName">1.0.0</string>
+    <string name="putWithMobilePhone">ورود با شماره موبایل</string>
 </resources>
