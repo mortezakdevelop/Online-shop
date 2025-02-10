@@ -15,6 +15,7 @@ import com.example.onlineshopapplication.BuildConfig
 import com.example.onlineshopapplication.R
 import com.example.onlineshopapplication.data.data_store.SessionManager
 import com.example.onlineshopapplication.databinding.FragmentSplashBinding
+import com.example.onlineshopapplication.ui.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -27,6 +28,8 @@ class SplashFragment : Fragment() {
 
     @Inject
     lateinit var sessionManager: SessionManager
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -2,6 +2,8 @@ package com.example.onlineshopapplication.viewmodels
 
 import academy.nouri.storeapp.data.models.login.BodyLogin
 import academy.nouri.storeapp.data.models.login.ResponseLogin
+import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -26,5 +28,4 @@ class LoginViewModel @Inject constructor(private val loginRepository: LoginRepos
         val response = loginRepository.postLogin(bodyLogin)
         _loginLiveData.value = NetworkMessagesResponse(response).generateNetworkMessageResponse()
     }
-
 }
