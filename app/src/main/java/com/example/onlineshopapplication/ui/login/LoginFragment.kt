@@ -15,6 +15,7 @@ import coil.load
 import com.example.onlineshopapplication.R
 import com.example.onlineshopapplication.databinding.FragmentLoginBinding
 import com.example.onlineshopapplication.ui.MainActivity
+import com.example.onlineshopapplication.ui.base.BaseFragment
 import com.example.onlineshopapplication.utils.NetworkRequestStatus
 import com.example.onlineshopapplication.utils.PersianNumberInputFilter
 import com.example.onlineshopapplication.utils.extensions.hideKeyboard
@@ -27,42 +28,45 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class LoginFragment : Fragment() {
+class LoginFragment : BaseFragment() {
 
-    private lateinit var binding:FragmentLoginBinding
-    private val viewModel:LoginViewModel by viewModels()
+    private lateinit var binding: FragmentLoginBinding
+    private val viewModel: LoginViewModel by viewModels()
     private lateinit var mainActivity: MainActivity
-    private lateinit var mobilePhone:String
+    private lateinit var mobilePhone: String
 
     @Inject
-    lateinit var bodyLogin:BodyLogin
+    lateinit var bodyLogin: BodyLogin
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentLoginBinding.inflate(layoutInflater,container,false)
+        binding = FragmentLoginBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
-            edtMobilePhone.text?.filters = arrayOf(PersianNumberInputFilter(),InputFilter.LengthFilter(11))
+            edtMobilePhone.text?.filters =
+                arrayOf(PersianNumberInputFilter(), InputFilter.LengthFilter(11))
             ivBottom.load(R.drawable.bg_circle)
             bodyLogin.hashCode = mainActivity.hashCode
 
             btnInputWithMobilePhone.setOnClickListener {
                 root.hideKeyboard()
                 mobilePhone = edtMobilePhone.text.toString()
-                viewModel.callLoginApi(bodyLogin = bodyLogin)
+                if (isNetworkAvailable) {
+                    viewModel.callLoginApi(bodyLogin = bodyLogin)
+                }
             }
         }
         loadLoginData()
         startRepeatingAnimation()
     }
 
-    private fun startRepeatingAnimation(){
-        binding.animationView.addAnimatorListener(object :Animator.AnimatorListener{
+    private fun startRepeatingAnimation() {
+        binding.animationView.addAnimatorListener(object : Animator.AnimatorListener {
             override fun onAnimationStart(p0: Animator) {
             }
 
@@ -82,14 +86,14 @@ class LoginFragment : Fragment() {
         })
     }
 
-    private fun loadLoginData(){
+    private fun loadLoginData() {
         binding.apply {
-            viewModel.loginLiveData.observe(viewLifecycleOwner){ response ->
-                when(response){
+            viewModel.loginLiveData.observe(viewLifecycleOwner) { response ->
+                when (response) {
                     is NetworkRequestStatus.Loading -> {}
                     is NetworkRequestStatus.Success -> {}
                     is NetworkRequestStatus.Error -> {
-                        response.errorMessage?.let { root.showSnackBar(it,Snackbar.LENGTH_SHORT) }
+                        response.errorMessage?.let { root.showSnackBar(it, Snackbar.LENGTH_SHORT) }
                     }
                 }
             }

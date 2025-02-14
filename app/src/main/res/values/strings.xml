@@ -12,4 +12,5 @@
     <string name="mobileNumber">شماره موبایل</string>
     <string name="versionName">1.0.0</string>
     <string name="putWithMobilePhone">ورود با شماره موبایل</string>
+    <string name="check_network">برای استفاده از اپلیکیشن اینترنت روا وصل کنید\n</string>
 </resources>

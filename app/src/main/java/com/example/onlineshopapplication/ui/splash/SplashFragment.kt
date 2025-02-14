@@ -16,13 +16,14 @@ import com.example.onlineshopapplication.R
 import com.example.onlineshopapplication.data.data_store.SessionManager
 import com.example.onlineshopapplication.databinding.FragmentSplashBinding
 import com.example.onlineshopapplication.ui.MainActivity
+import com.example.onlineshopapplication.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class SplashFragment : Fragment() {
+class SplashFragment : BaseFragment() {
 
     private lateinit var binding: FragmentSplashBinding
 
@@ -49,12 +50,14 @@ class SplashFragment : Fragment() {
         lifecycleScope.launch {
             val token = sessionManager.getToken.first()
             Handler(Looper.getMainLooper()).postDelayed({
-                if (token == null) {
-                    //login
-                    findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
-                } else {
-                    //home
-                    findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
+                if (isNetworkAvailable){
+                    if (token == null) {
+                        //login
+                        findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
+                    } else {
+                        //home
+                        findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
+                    }
                 }
             },3000)
         }
