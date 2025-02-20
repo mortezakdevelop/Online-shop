@@ -54,6 +54,10 @@ class LoginFragment : BaseFragment() {
             ivBottom.load(R.drawable.bg_circle)
             bodyLogin.hashCode = mainActivity.hashCode
 
+
+            binding.btnInputWithMobilePhone.text = getString(R.string.putWithMobilePhone)
+
+
             btnInputWithMobilePhone.setOnClickListener {
                 root.hideKeyboard()
                 mobilePhone = edtMobilePhone.text.toString()

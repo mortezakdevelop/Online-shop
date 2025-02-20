@@ -5,6 +5,7 @@ import android.content.res.TypedArray
 import android.graphics.drawable.Animatable
 import android.graphics.drawable.Drawable
 import android.util.TypedValue
+import com.example.onlineshopapplication.R
 import com.google.android.material.button.MaterialButton
 
 private fun drawableProgress(context: Context): Drawable? {
@@ -21,16 +22,22 @@ private fun drawableProgress(context: Context): Drawable? {
 
 fun MaterialButton.enableLoading(isLoading:Boolean){
     maxLines = 1
-    iconGravity = MaterialButton.ICON_GRAVITY_END
+    iconGravity = MaterialButton.ICON_GRAVITY_TEXT_START
+    val originalText = getTag(R.id.btnInputWithMobilePhone) as? String ?: text.toString()
+
     if (isLoading){
+
         var drawable = icon
         if (drawable !is Animatable){
             drawable = drawableProgress(context)
             icon = drawable
         }
         (drawable as Animatable).start()
+        setTag(R.id.btnInputWithMobilePhone, originalText)
+        text = ""
         alpha = 0.5f
     }else{
+        text = originalText
         icon = null
         alpha = 1.0f
     }
