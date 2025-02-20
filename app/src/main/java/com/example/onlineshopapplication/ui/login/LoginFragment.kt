@@ -18,6 +18,7 @@ import com.example.onlineshopapplication.ui.MainActivity
 import com.example.onlineshopapplication.ui.base.BaseFragment
 import com.example.onlineshopapplication.utils.NetworkRequestStatus
 import com.example.onlineshopapplication.utils.PersianNumberInputFilter
+import com.example.onlineshopapplication.utils.extensions.enableLoading
 import com.example.onlineshopapplication.utils.extensions.hideKeyboard
 import com.example.onlineshopapplication.utils.extensions.showSnackBar
 import com.example.onlineshopapplication.viewmodels.LoginViewModel
@@ -90,9 +91,16 @@ class LoginFragment : BaseFragment() {
         binding.apply {
             viewModel.loginLiveData.observe(viewLifecycleOwner) { response ->
                 when (response) {
-                    is NetworkRequestStatus.Loading -> {}
-                    is NetworkRequestStatus.Success -> {}
+                    is NetworkRequestStatus.Loading -> {
+                        btnInputWithMobilePhone.enableLoading(true)
+                    }
+
+                    is NetworkRequestStatus.Success -> {
+                        btnInputWithMobilePhone.enableLoading(false)
+                    }
+
                     is NetworkRequestStatus.Error -> {
+                        btnInputWithMobilePhone.enableLoading(false)
                         response.errorMessage?.let { root.showSnackBar(it, Snackbar.LENGTH_SHORT) }
                     }
                 }
