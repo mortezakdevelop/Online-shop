@@ -53,10 +53,10 @@ class SplashFragment : BaseFragment() {
                 if (isNetworkAvailable){
                     if (token == null) {
                         //login
-                        findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
+                        findNavController().navigate(R.id.actionSplashToLogin)
                     } else {
                         //home
-                        findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
+                        //findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
                     }
                 }
             },3000)

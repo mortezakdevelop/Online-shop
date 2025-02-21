@@ -13,4 +13,7 @@
     <string name="versionName">1.0.0</string>
     <string name="putWithMobilePhone">ورود با شماره موبایل</string>
     <string name="check_network">برای استفاده از اپلیکیشن اینترنت روا وصل کنید\n</string>
+    <string name="loginCode">کد ورود</string>
+    <string name="enterVerifyCode">لطفا کد پیامک شده را وارد کنید</string>
+    <string name="sendAgainVerifyCode">ارسال مجدد کد تایید</string>
 </resources>

@@ -11,13 +11,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import coil.load
 import com.example.onlineshopapplication.R
 import com.example.onlineshopapplication.databinding.FragmentLoginBinding
 import com.example.onlineshopapplication.ui.MainActivity
 import com.example.onlineshopapplication.ui.base.BaseFragment
 import com.example.onlineshopapplication.utils.NetworkRequestStatus
-import com.example.onlineshopapplication.utils.PersianNumberInputFilter
 import com.example.onlineshopapplication.utils.extensions.enableLoading
 import com.example.onlineshopapplication.utils.extensions.hideKeyboard
 import com.example.onlineshopapplication.utils.extensions.showSnackBar
@@ -49,20 +49,18 @@ class LoginFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
-            edtMobilePhone.text?.filters =
-                arrayOf(PersianNumberInputFilter(), InputFilter.LengthFilter(11))
             ivBottom.load(R.drawable.bg_circle)
             bodyLogin.hashCode = mainActivity.hashCode
 
-
             binding.btnInputWithMobilePhone.text = getString(R.string.putWithMobilePhone)
-
-
             btnInputWithMobilePhone.setOnClickListener {
                 root.hideKeyboard()
                 mobilePhone = edtMobilePhone.text.toString()
-                if (isNetworkAvailable) {
-                    viewModel.callLoginApi(bodyLogin = bodyLogin)
+                if (mobilePhone.length == 11){
+                    bodyLogin.login = mobilePhone
+                    if (isNetworkAvailable) {
+                        viewModel.callLoginApi(bodyLogin = bodyLogin)
+                    }
                 }
             }
         }
@@ -101,6 +99,7 @@ class LoginFragment : BaseFragment() {
 
                     is NetworkRequestStatus.Success -> {
                         btnInputWithMobilePhone.enableLoading(false)
+                        findNavController().navigate(R.id.action_loginFragment_to_verifyOtpFragment)
                     }
 
                     is NetworkRequestStatus.Error -> {
