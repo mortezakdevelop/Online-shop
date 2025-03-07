@@ -99,8 +99,8 @@ class LoginFragment : BaseFragment() {
 
                     is NetworkRequestStatus.Success -> {
                         btnInputWithMobilePhone.enableLoading(false)
-                        val direction = LoginFragmentDirections.actionLoginToVerity(mobilePhone)
-                        findNavController().navigate(R.id.action_loginFragment_to_verifyOtpFragment)
+                        val direction = LoginFragmentDirections.actionLoginFragmentToVerifyOtpFragment(mobilePhone)
+                        findNavController().navigate(direction)
                     }
 
                     is NetworkRequestStatus.Error -> {
