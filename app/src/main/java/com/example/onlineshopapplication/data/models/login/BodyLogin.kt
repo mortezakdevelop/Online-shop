@@ -8,6 +8,6 @@ data class BodyLogin(
     var login: String? = null,
     @SerializedName("hash_code")
     var hashCode: String? = null,
-    /*@SerializedName("code")
-    var code: Int? = null*/
+    @SerializedName("code")
+    var code: Int? = null
 )

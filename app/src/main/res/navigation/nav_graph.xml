@@ -14,10 +14,10 @@
     <action
         android:id="@+id/actionSplashToLogin"
         app:destination="@+id/nav_login"
-        app:exitAnim="@anim/to_right_from_left"
         app:enterAnim="@anim/from_left_to_right"
-        app:popExitAnim="@anim/from_right_to_left"
-        app:popEnterAnim="@anim/to_left_from_right"/>
+        app:exitAnim="@anim/to_right_from_left"
+        app:popEnterAnim="@anim/to_left_from_right"
+        app:popExitAnim="@anim/from_right_to_left" />
 
     <navigation
         android:id="@+id/nav_login"
@@ -26,19 +26,24 @@
             android:id="@+id/loginFragment"
             android:name="com.example.onlineshopapplication.ui.login.LoginFragment"
             android:label="LoginFragment"
-            tools:layout="@layout/fragment_login" >
+            tools:layout="@layout/fragment_login">
             <action
                 android:id="@+id/action_loginFragment_to_verifyOtpFragment"
                 app:destination="@id/verifyOtpFragment"
-                app:exitAnim="@anim/to_right_from_left"
                 app:enterAnim="@anim/from_left_to_right"
-                app:popExitAnim="@anim/from_right_to_left"
-                app:popEnterAnim="@anim/to_left_from_right"/>
+                app:exitAnim="@anim/to_right_from_left"
+                app:popEnterAnim="@anim/to_left_from_right"
+                app:popExitAnim="@anim/from_right_to_left" />
         </fragment>
         <fragment
             android:id="@+id/verifyOtpFragment"
             android:name="com.example.onlineshopapplication.ui.login.VerifyOtpFragment"
             android:label="fragment_verify_otp"
-            tools:layout="@layout/fragment_verify_otp" />
+            tools:layout="@layout/fragment_verify_otp">
+            <argument
+                android:name="phone"
+                app:argType="string" />
+
+        </fragment>
     </navigation>
 </navigation>
