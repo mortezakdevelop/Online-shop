@@ -1,10 +1,16 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.OnlineShopApplication" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.OnlineShopApplication" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="android:statusBarColor">@color/eerieBlack</item>
     </style>
 
     <style name="Theme.OnlineShopApplication" parent="Base.Theme.OnlineShopApplication" />
+
+    <style name="ButtonNavigationViewFont" parent="@style/TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">@dimen/_7font_mdp</item>
+        <item name="fontFamily">@font/iransans</item>
+    </style>
+
 </resources>

@@ -38,6 +38,10 @@ class MainActivity : BaseActivity() {
         navHost.navController.addOnDestinationChangedListener{_,destination,_ ->
             binding.apply {
                 when(destination.id){
+                    R.id.homeFragment -> bottomNav.isVisible = true
+                    R.id.categoriesFragment -> bottomNav.isVisible = true
+                    R.id.cartFragment -> bottomNav.isVisible = true
+                    R.id.profileFragment -> bottomNav.isVisible = true
                     else -> bottomNav.isVisible = false
                 }
             }

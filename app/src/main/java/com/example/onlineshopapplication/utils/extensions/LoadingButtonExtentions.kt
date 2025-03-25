@@ -5,6 +5,7 @@ import android.content.res.TypedArray
 import android.graphics.drawable.Animatable
 import android.graphics.drawable.Drawable
 import android.util.TypedValue
+import androidx.core.view.setPadding
 import com.example.onlineshopapplication.R
 import com.google.android.material.button.MaterialButton
 
@@ -20,15 +21,14 @@ private fun drawableProgress(context: Context): Drawable? {
     return drawable
 }
 
-fun MaterialButton.enableLoading(isLoading:Boolean){
+fun MaterialButton.enableLoading(isLoading: Boolean) {
     maxLines = 1
-    iconGravity = MaterialButton.ICON_GRAVITY_TEXT_START
+    iconGravity = MaterialButton.ICON_GRAVITY_TEXT_START // وسط‌چین کردن آیکون
     val originalText = getTag(R.id.btnInputWithMobilePhone) as? String ?: text.toString()
 
-    if (isLoading){
-
+    if (isLoading) {
         var drawable = icon
-        if (drawable !is Animatable){
+        if (drawable !is Animatable) {
             drawable = drawableProgress(context)
             icon = drawable
         }
@@ -36,9 +36,11 @@ fun MaterialButton.enableLoading(isLoading:Boolean){
         setTag(R.id.btnInputWithMobilePhone, originalText)
         text = ""
         alpha = 0.5f
-    }else{
+        isClickable = false
+    } else {
         text = originalText
         icon = null
         alpha = 1.0f
+        isClickable = true
     }
 }

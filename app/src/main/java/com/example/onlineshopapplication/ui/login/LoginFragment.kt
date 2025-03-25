@@ -5,6 +5,7 @@ import android.animation.Animator
 import android.content.Context
 import android.os.Bundle
 import android.text.InputFilter
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +22,7 @@ import com.example.onlineshopapplication.utils.NetworkRequestStatus
 import com.example.onlineshopapplication.utils.extensions.enableLoading
 import com.example.onlineshopapplication.utils.extensions.hideKeyboard
 import com.example.onlineshopapplication.utils.extensions.showSnackBar
+import com.example.onlineshopapplication.utils.isCalledVerify
 import com.example.onlineshopapplication.viewmodels.LoginViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -59,6 +61,7 @@ class LoginFragment : BaseFragment() {
                 if (mobilePhone.length == 11){
                     bodyLogin.login = mobilePhone
                     if (isNetworkAvailable) {
+                        isCalledVerify  = true
                         viewModel.callLoginApi(bodyLogin = bodyLogin)
                     }
                 }
@@ -99,8 +102,11 @@ class LoginFragment : BaseFragment() {
 
                     is NetworkRequestStatus.Success -> {
                         btnInputWithMobilePhone.enableLoading(false)
-                        val direction = LoginFragmentDirections.actionLoginFragmentToVerifyOtpFragment(mobilePhone)
-                        findNavController().navigate(direction)
+                        if (isCalledVerify){
+                            val direction = LoginFragmentDirections.actionLoginFragmentToVerifyOtpFragment(mobilePhone)
+                            findNavController().navigate(direction)
+                        }
+                        Log.d("LoginFragment", "loadLoginData: $mobilePhone")
                     }
 
                     is NetworkRequestStatus.Error -> {

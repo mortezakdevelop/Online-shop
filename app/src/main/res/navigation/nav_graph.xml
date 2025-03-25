@@ -19,6 +19,16 @@
         app:popEnterAnim="@anim/to_left_from_right"
         app:popExitAnim="@anim/from_right_to_left" />
 
+ <action
+        android:id="@+id/actionSplashToMain"
+        app:destination="@+id/nav_main"
+        app:enterAnim="@anim/from_left_to_right"
+        app:exitAnim="@anim/to_right_from_left"
+        app:popEnterAnim="@anim/to_left_from_right"
+        app:popExitAnim="@anim/from_right_to_left" />
+
+
+
     <navigation
         android:id="@+id/nav_login"
         app:startDestination="@id/loginFragment">
@@ -45,5 +55,28 @@
                 app:argType="string" />
 
         </fragment>
+    </navigation>
+    <navigation android:id="@+id/nav_main"
+        app:startDestination="@id/homeFragment">
+        <fragment
+            android:id="@+id/homeFragment"
+            android:name="com.example.onlineshopapplication.ui.home.HomeFragment"
+            android:label="fragment_home"
+            tools:layout="@layout/fragment_home" />
+        <fragment
+            android:id="@+id/profileFragment"
+            android:name="com.example.onlineshopapplication.ui.profile.ProfileFragment"
+            android:label="fragment_profile"
+            tools:layout="@layout/fragment_profile" />
+        <fragment
+            android:id="@+id/cartFragment"
+            android:name="com.example.onlineshopapplication.ui.cart.CartFragment"
+            android:label="fragment_cart"
+            tools:layout="@layout/fragment_cart" />
+        <fragment
+            android:id="@+id/categoriesFragment"
+            android:name="com.example.onlineshopapplication.ui.categories.CategoriesFragment"
+            android:label="fragment_categories"
+            tools:layout="@layout/fragment_categories" />
     </navigation>
 </navigation>

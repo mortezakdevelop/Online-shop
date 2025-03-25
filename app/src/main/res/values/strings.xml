@@ -16,4 +16,5 @@
     <string name="loginCode">کد ورود</string>
     <string name="enterVerifyCode">لطفا کد پیامک شده را وارد کنید</string>
     <string name="sendAgainVerifyCode">ارسال مجدد کد تایید</string>
+    <string name="second">ثانیه</string>
 </resources>
