@@ -17,4 +17,14 @@
     <string name="enterVerifyCode">لطفا کد پیامک شده را وارد کنید</string>
     <string name="sendAgainVerifyCode">ارسال مجدد کد تایید</string>
     <string name="second">ثانیه</string>
+    <string name="discount">تخفیف</string>
+    <string name="day">روز</string>
+    <string name="hour">ساعت</string>
+    <string name="minute">دقیقه</string>
+    <string name="laptop">لپتاب</string>
+    <string name="showAll">نمایش همه</string>
+    <string name="mobile">موبایل</string>
+    <string name="menShoes">کفش مردانه</string>
+    <string name="stationery">ثابت</string>
+    <string name="store_app">Store app</string>
 </resources>

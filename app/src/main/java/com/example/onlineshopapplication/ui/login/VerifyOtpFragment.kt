@@ -38,7 +38,6 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class VerifyOtpFragment : BaseFragment() {
-    //Binding
     private var _binding: FragmentVerifyOtpBinding? = null
     private val binding get() = _binding!!
     @Inject
@@ -47,7 +46,6 @@ class VerifyOtpFragment : BaseFragment() {
     @Inject
     lateinit var sessionManager: SessionManager
 
-    //Other
     private val viewModel by viewModels<LoginViewModel>()
     private val args by navArgs<VerifyOtpFragmentArgs>()
 
@@ -59,17 +57,12 @@ class VerifyOtpFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         isCalledVerify = false
-        //Args
         args.let {
             body.login = it.phone
         }
-        //InitViews
         binding.apply {
-            //Bottom image
             bottomImg.load(R.drawable.bg_circle)
-            //Customize pin view text color
             pinView.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-            //Complete code
             pinView.setPinViewEventListener(object : Pinview.PinViewEventListener {
                 override fun onDataEntered(pinview: Pinview?, fromUser: Boolean) {
                     body.code = pinview?.value?.toInt()
@@ -77,14 +70,12 @@ class VerifyOtpFragment : BaseFragment() {
                         viewModel.callVerifyApi(body)
                 }
             })
-            //Send again code
             sendAgainBtn.setOnClickListener {
                 if (isNetworkAvailable)
                     viewModel.callLoginApi(body)
                 handleTimer().cancel()
             }
         }
-        //Start timer
         lifecycleScope.launch {
             delay(500)
             handleTimer().start()

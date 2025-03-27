@@ -13,4 +13,27 @@
         <item name="fontFamily">@font/iransans</item>
     </style>
 
+    <style name="ColoredShadowDark">
+        <item name="android:outlineSpotShadowColor" tools:targetApi="p">@color/royalBlue</item>
+        <item name="android:outlineAmbientShadowColor" tools:targetApi="p">@color/royalBlue</item>
+    </style>
+
+    <style name="ColoredShadowLight">
+        <item name="android:outlineSpotShadowColor" tools:targetApi="p">@color/cornflowerBlue</item>
+        <item name="android:outlineAmbientShadowColor" tools:targetApi="p">@color/cornflowerBlue</item>
+    </style>
+
+    <style name="CircleImage">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="DarkProgressbar">
+        <item name="colorAccent">@color/darkStrategy</item>
+    </style>
+
+ <style name="SalmonProgressbar">
+        <item name="colorAccent">@color/salmon</item>
+    </style>
+
 </resources>
