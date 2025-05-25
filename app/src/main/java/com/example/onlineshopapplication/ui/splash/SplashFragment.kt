@@ -52,6 +52,7 @@ class SplashFragment : BaseFragment() {
             val token = sessionManager.getToken.first()
             Log.d("splash", "checkUserSession: $token")
             Handler(Looper.getMainLooper()).postDelayed({
+                findNavController().popBackStack(R.id.splashFragment, true)
                 if (isNetworkAvailable){
                     if (token == null) {
                         //login

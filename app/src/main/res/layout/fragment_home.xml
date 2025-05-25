@@ -100,8 +100,7 @@
             <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
                 android:id="@+id/bannerList"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_145mdp"
-                android:visibility="gone" />
+                android:layout_height="@dimen/_145mdp" />
             <!-- Loading -->
             <ProgressBar
                 android:id="@+id/bannerLoading"

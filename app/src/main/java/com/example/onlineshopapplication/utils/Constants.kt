@@ -3,6 +3,8 @@ package com.example.onlineshopapplication.utils
 
 
 const val BASE_URL = "https://shop.nouri-api.ir/api/v1/"
+const val BASE_URL_WITH_STORAGE = "https://shop.nouri-api.ir/storage/"
+
 const val CONNECTION_TIME_OUT = 90L
 const val PING_INTERVAL = 3L
 
@@ -18,3 +20,5 @@ const val USER_TOKEN_DATA = "User_Token_Data"
 
 
 var isCalledVerify = false
+
+const val GENERAL = "general"

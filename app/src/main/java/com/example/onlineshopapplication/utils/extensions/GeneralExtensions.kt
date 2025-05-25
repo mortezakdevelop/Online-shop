@@ -6,6 +6,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import coil.load
 import coil.request.CachePolicy
+import com.example.onlineshopapplication.R
 import com.google.android.material.snackbar.Snackbar
 
 
@@ -23,5 +24,6 @@ fun ImageView.loadImage(url: String) {
         crossfade(true)
         crossfade(500)
         diskCachePolicy(CachePolicy.ENABLED)
+        error(R.drawable.placeholder)
     }
 }
