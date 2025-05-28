@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
+import androidx.core.view.isVisible
 import coil.load
 import coil.request.CachePolicy
 import com.example.onlineshopapplication.R
@@ -15,6 +16,8 @@ fun View.hideKeyboard() {
     inputMethod.hideSoftInputFromWindow(windowToken, 0)
 }
 
+//-1 for short show message
+// 0 for long show message
 fun View.showSnackBar(message: String, duration: Int) {
     Snackbar.make(this, message, duration).show()
 }
@@ -26,4 +29,15 @@ fun ImageView.loadImage(url: String) {
         diskCachePolicy(CachePolicy.ENABLED)
         error(R.drawable.placeholder)
     }
+}
+
+fun View.isVisible(isShowLoading: Boolean, container: View) {
+    if (isShowLoading) {
+        this.isVisible = true
+        container.isVisible = false
+    } else {
+        this.isVisible = false
+        container.isVisible = true
+    }
+
 }

@@ -13,12 +13,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import coil.request.CachePolicy
 import com.example.onlineshopapplication.R
+import com.example.onlineshopapplication.data.models.home.BannerResponse
 import com.example.onlineshopapplication.databinding.FragmentHomeBinding
 import com.example.onlineshopapplication.databinding.FragmentVerifyOtpBinding
 import com.example.onlineshopapplication.ui.home.adapter.BannerAdapter
 import com.example.onlineshopapplication.ui.login.LoginFragmentDirections
 import com.example.onlineshopapplication.utils.NetworkRequestStatus
 import com.example.onlineshopapplication.utils.extensions.enableLoading
+import com.example.onlineshopapplication.utils.extensions.isVisible
 import com.example.onlineshopapplication.utils.extensions.loadImage
 import com.example.onlineshopapplication.utils.extensions.showSnackBar
 import com.example.onlineshopapplication.utils.isCalledVerify
@@ -35,7 +37,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     @Inject
-    lateinit var bannerAdapter:BannerAdapter
+    lateinit var bannerAdapter: BannerAdapter
 
     private val profileViewModel by activityViewModels<ProfileViewModel>()
     private val homeViewModel by activityViewModels<HomeViewModel>()
@@ -43,7 +45,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentHomeBinding.inflate(layoutInflater,container,false)
+        _binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
         loadProfileDetailData()
         loadBannerData()
         return binding.root
@@ -67,10 +69,10 @@ class HomeFragment : Fragment() {
                     is NetworkRequestStatus.Success -> {
                         avatarLoading.isVisible = false
                         response.data.let { profileResponse ->
-                            if (profileResponse?.avatar != null){
-                               avatarImg.loadImage(profileResponse.avatar)
+                            if (profileResponse?.avatar != null) {
+                                avatarImg.loadImage(profileResponse.avatar)
                                 avatarBadgeImg.isVisible = false
-                            }else{
+                            } else {
                                 avatarBadgeImg.isVisible = true
                                 avatarImg.load(R.drawable.placeholder_user)
                             }
@@ -91,27 +93,38 @@ class HomeFragment : Fragment() {
             homeViewModel.bannerList.observe(viewLifecycleOwner) { response ->
                 when (response) {
                     is NetworkRequestStatus.Loading -> {
-                        bannerLoading.isVisible = true
+                        bannerLoading.isVisible(true, bannerList)
                     }
 
                     is NetworkRequestStatus.Success -> {
-                        bannerLoading.isVisible = false
+                        bannerLoading.isVisible(false, bannerList)
                         response.data?.let { data ->
-                            if(data.isNotEmpty()){
-                                bannerList.apply {
-                                    layoutManager = LinearLayoutManager(requireContext())
-                                    adapter = bannerAdapter
-                                }
+                            if (data.isNotEmpty()) {
+                                initBannerRecycler(data)
                             }
                         }
                     }
 
                     is NetworkRequestStatus.Error -> {
-                        avatarLoading.isVisible = false
+                        avatarLoading.isVisible(false, bannerList)
                         response.errorMessage?.let { root.showSnackBar(it, Snackbar.LENGTH_SHORT) }
                     }
                 }
             }
+        }
+    }
+
+    private fun initBannerRecycler(data: List<BannerResponse.BannerResponseItem>) {
+        bannerAdapter.setData(data)
+        binding.bannerList.apply {
+            adapter = bannerAdapter
+            set3DItem(true)
+            setAlpha(true)
+            setInfinite(false)
+        }
+
+        bannerAdapter.setOnItemClickListener {
+
         }
     }
 
