@@ -176,8 +176,8 @@
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/discountTimerContainer"
-                        app:layout_constraintVertical_bias="0.0" />
-                    <!--app:shimmer_recycler_layout="@layout/item_discount_shimmer"-->
+                        app:layout_constraintVertical_bias="0.0"
+                        app:shimmer_recycler_layout="@layout/item_discount_shimmer"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
             <!-- Mobile -->

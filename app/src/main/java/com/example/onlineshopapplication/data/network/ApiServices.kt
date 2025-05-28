@@ -4,6 +4,7 @@ import academy.nouri.storeapp.data.models.login.BodyLogin
 import academy.nouri.storeapp.data.models.login.ResponseLogin
 import academy.nouri.storeapp.data.models.login.ResponseVerify
 import com.example.onlineshopapplication.data.models.home.BannerResponse
+import com.example.onlineshopapplication.data.models.home.DiscountResponse
 import com.example.onlineshopapplication.data.models.profile.ProfileResponse
 import retrofit2.Response
 import retrofit2.http.Body
@@ -23,6 +24,9 @@ interface ApiServices {
 
     @GET("ad/swiper/{slug}")
     suspend fun getBannerList(@Path("slug") slug: String): Response<BannerResponse>
+
+@GET("offers/discount/{slug}")
+    suspend fun getDiscountList(@Path("slug") slug: String): Response<DiscountResponse>
 
 
 }

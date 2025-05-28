@@ -10,14 +10,19 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.PagerSnapHelper
 import coil.load
 import coil.request.CachePolicy
 import com.example.onlineshopapplication.R
 import com.example.onlineshopapplication.data.models.home.BannerResponse
+import com.example.onlineshopapplication.data.models.home.DiscountResponse
+import com.example.onlineshopapplication.data.models.home.DiscountResponse.*
 import com.example.onlineshopapplication.databinding.FragmentHomeBinding
 import com.example.onlineshopapplication.databinding.FragmentVerifyOtpBinding
 import com.example.onlineshopapplication.ui.home.adapter.BannerAdapter
+import com.example.onlineshopapplication.ui.home.adapter.DiscountAdapter
 import com.example.onlineshopapplication.ui.login.LoginFragmentDirections
+import com.example.onlineshopapplication.utils.NetworkMessagesResponse
 import com.example.onlineshopapplication.utils.NetworkRequestStatus
 import com.example.onlineshopapplication.utils.extensions.enableLoading
 import com.example.onlineshopapplication.utils.extensions.isVisible
@@ -26,6 +31,8 @@ import com.example.onlineshopapplication.utils.extensions.showSnackBar
 import com.example.onlineshopapplication.utils.isCalledVerify
 import com.example.onlineshopapplication.viewmodels.HomeViewModel
 import com.example.onlineshopapplication.viewmodels.ProfileViewModel
+import com.faltenreich.skeletonlayout.SkeletonConfig
+import com.faltenreich.skeletonlayout.createSkeleton
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -39,8 +46,12 @@ class HomeFragment : Fragment() {
     @Inject
     lateinit var bannerAdapter: BannerAdapter
 
+    @Inject
+    lateinit var discountAdapter:DiscountAdapter
+
     private val profileViewModel by activityViewModels<ProfileViewModel>()
     private val homeViewModel by activityViewModels<HomeViewModel>()
+    private val pagerSnapHelper by lazy { PagerSnapHelper() }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -114,6 +125,31 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun loadDiscountData() {
+        binding.apply {
+            homeViewModel.discountList.observe(viewLifecycleOwner) { response ->
+                when (response) {
+                    is NetworkRequestStatus.Loading -> {
+                        discountList.showSkeleton()
+                    }
+
+                    is NetworkRequestStatus.Success -> {
+                        discountList.showOriginal()
+                        response.data?.let {
+                            if (it.isNotEmpty()) {
+
+                            }
+                        }
+                    }
+
+                    is NetworkRequestStatus.Error -> {
+                        discountList.showOriginal()
+                    }
+                }
+            }
+        }
+    }
+
     private fun initBannerRecycler(data: List<BannerResponse.BannerResponseItem>) {
         bannerAdapter.setData(data)
         binding.bannerList.apply {
@@ -126,6 +162,22 @@ class HomeFragment : Fragment() {
         bannerAdapter.setOnItemClickListener {
 
         }
+
+        pagerSnapHelper.attachToRecyclerView(binding.bannerList)
+        binding.bannerIndicator.attachToRecyclerView(binding.bannerList, pagerSnapHelper)
+    }
+
+    private fun initDiscountRecycler(data: List<ResponseDiscountItem>) {
+        discountAdapter.setData(data)
+        binding.discountList.apply {
+        }
+
+        discountAdapter.setOnItemClickListener {
+
+        }
+
+        pagerSnapHelper.attachToRecyclerView(binding.bannerList)
+        binding.bannerIndicator.attachToRecyclerView(binding.bannerList, pagerSnapHelper)
     }
 
 

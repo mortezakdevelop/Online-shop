@@ -104,6 +104,7 @@ dependencies {
     //others
     implementation("com.facebook.shimmer:shimmer:0.5.0")
     implementation("com.faltenreich:skeletonlayout:5.0.0")
+    implementation("com.todkars:shimmer-recyclerview:0.4.1")
     implementation("com.airbnb.android:lottie:5.2.0")
     implementation("kr.co.prnd:readmore-textview:1.0.0")
     implementation("com.github.MrNouri:DynamicSizes:1.0")

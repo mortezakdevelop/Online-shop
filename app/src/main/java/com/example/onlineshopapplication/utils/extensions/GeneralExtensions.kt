@@ -9,6 +9,7 @@ import coil.load
 import coil.request.CachePolicy
 import com.example.onlineshopapplication.R
 import com.google.android.material.snackbar.Snackbar
+import java.text.DecimalFormat
 
 
 fun View.hideKeyboard() {
@@ -39,5 +40,8 @@ fun View.isVisible(isShowLoading: Boolean, container: View) {
         this.isVisible = false
         container.isVisible = true
     }
+}
 
+fun Int.moneySeparating():String{
+    return "${DecimalFormat("#,###.##").format(this)}تومان"
 }
